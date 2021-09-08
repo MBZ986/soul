@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smartrick.soul.mapper.PosterMapper">
+
+
+    <update id="reading">
+        UPDATE t_poster SET play_num=play_num+1 WHERE id=${posterId}
+    </update>
+
+    <update id="liker">
+        UPDATE t_poster SET like_num=like_num+1  WHERE id=${posterId}
+    </update>
+
+    <update id="unliker">
+        UPDATE t_poster SET like_num=like_num-1  WHERE id=${posterId}
+    </update>
+
+    <update id="collect">
+        UPDATE t_poster SET collect_num=collect_num+1  WHERE id=${posterId}
+    </update>
+
+    <update id="uncollect">
+        UPDATE t_poster SET collect_num=collect_num-1 WHERE id=${posterId}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smartrick.soul.mapper.CommentMapper">
+
+    <resultMap id="commentMap" type="comment">
+        <id property="id" column="id"/>
+        <result property="mediaId" column="media_id"/>
+        <result property="mediaType" column="media_type"/>
+        <result property="content" column="content"/>
+        <result property="likeNum" column="likeNum"/>
+        <association property="releaser" javaType="user">
+            <id property="id" column="u_id" />
+            <result property="username" column="username"/>
+            <result property="headImgUrl" column="head_img_url"/>
+<!--            <result property="signature" column="signature"/>-->
+<!--            <result property="email" column="email"/>-->
+<!--            <result property="birthday" column="birthday"/>-->
+        </association>
+    </resultMap>
+
+    <select id="selectCommentsByMedia" resultMap="commentMap">
+        SELECT * FROM t_comment c,t_user u
+        WHERE c.releaser=u.id
+        AND media_id=${mediaId}
+        AND media_type=${mediaType}
+    </select>
+
+    <update id="liker">
+        UPDATE t_comment SET like_num=like_num+1 WHERE id=${commentId}
+    </update>
+
+    <update id="unliker">
+        UPDATE t_comment SET like_num=like_num-1 WHERE id=${commentId}
+    </update>
+
+
+</mapper>

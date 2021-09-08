@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smartrick.soul.mapper.UserMapper">
+    <resultMap id="userSimpleMap" type="user">
+        <id property="id" column="id" />
+        <result property="username" column="username"/>
+        <result property="headImgUrl" column="head_img_url"/>
+        <result property="signature" column="signature"/>
+        <result property="email" column="email"/>
+<!--        <result property="birthday" column="birthday"/>-->
+    </resultMap>
+
+
+    <select id="selectFollows" resultMap="userSimpleMap">
+        SELECT id,username,head_img_url,signature,email,birthday FROM t_user WHERE id IN (
+            SELECT follow_id FROM t_follow WHERE user_id=${userId}
+        ) LIMIT ${current},${size}
+    </select>
+
+    <select id="selectFans" resultMap="userSimpleMap">
+        SELECT id,username,head_img_url,signature,email,birthday FROM t_user WHERE id IN (
+            SELECT user_id FROM t_follow WHERE follow_id=${userId}
+        ) LIMIT ${current},${size}
+    </select>
+
+    <insert id="insertFollow" keyColumn="id">
+        INSERT INTO t_follow(user_id,follow_id) VALUES(${userId},${followId})
+    </insert>
+
+    <delete id="deleteFollow">
+        DELETE * FROM t_follow WHERE user_id=${user_id},follow_id=${followId}
+    </delete>
+
+    <select id="selectAllUserSimple" resultMap="userSimpleMap">
+        SELECT id,username,head_img_url,signature,email,birthday FROM t_user LIMIT ${current},${size}
+    </select>
+</mapper>

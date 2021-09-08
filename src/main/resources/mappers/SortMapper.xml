@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smartrick.soul.mapper.SortMapper">
+<!--    <resultMap id="videoMap" type="video">-->
+<!--        <id property="id" column="v_id" />-->
+<!--        <result property="name" column="name"/>-->
+<!--        <result property="cover" column="cover"/>-->
+<!--        <result property="resume" column="resume"/>-->
+<!--        <result property="content" column="content"/>-->
+<!--        <result property="likeNum" column="like_num"/>-->
+<!--        <result property="playNum" column="play_num"/>-->
+<!--        <association property="releaser" javaType="user">-->
+<!--            <id property="id" column="u_id" />-->
+<!--            <result property="username" column="username"/>-->
+<!--            <result property="headImgUrl" column="head_img_url"/>-->
+<!--            <result property="signature" column="signature"/>-->
+<!--            <result property="email" column="email"/>-->
+<!--            <result property="birthday" column="birthday"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+
+<!--    <resultMap id="musicMap" type="music">-->
+<!--        <id property="id" column="id" />-->
+<!--        <result property="name" column="name"/>-->
+<!--        <result property="author" column="author"/>-->
+<!--        <result property="cover" column="cover"/>-->
+<!--        <result property="content" column="content"/>-->
+<!--        <result property="playNum" column="play_num"/>-->
+<!--        <result property="likeNum" column="like_num"/>-->
+<!--    </resultMap>-->
+
+<!--    <resultMap id="messageMap" type="message">-->
+<!--        <id property="id" column="m_id" />-->
+<!--        <result property="title" column="title"/>-->
+<!--        <result property="cover" column="cover"/>-->
+<!--        <result property="content" column="content"/>-->
+<!--        <result property="readNum" column="read_num"/>-->
+<!--        <result property="likeNum" column="like_num"/>-->
+<!--        <association property="releaser"  javaType="user">-->
+<!--            <id property="id" column="u_id" />-->
+<!--            <result property="username" column="username"/>-->
+<!--            <result property="headImgUrl" column="head_img_url"/>-->
+<!--            <result property="signature" column="signature"/>-->
+<!--            <result property="email" column="email"/>-->
+<!--            <result property="birthday" column="birthday"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+
+
+<!--    <select id="selectVideosBySort" resultMap="videoMap">-->
+<!--        SELECT v.id v_id,u.id u_id,v.*,u.* FROM t_video v,t_user u WHERE v.releaser=u.id AND v.id in (-->
+<!--            SELECT media_id FROM t_media_sort WHERE media_type=${mediaType} AND sort_id=${sortId}-->
+<!--        )-->
+<!--    </select>-->
+
+<!--    <select id="selectMusicsBySort" resultMap="musicMap">-->
+<!--        SELECT * FROM t_music WHERE id in (-->
+<!--            SELECT media_id FROM t_media_sort WHERE media_type=${mediaType} AND sort_id=${sortId}-->
+<!--        )-->
+<!--    </select>-->
+
+<!--    <select id="selectMessagesBySort" resultMap="messageMap">-->
+<!--        SELECT m.id m_id,u.id u_id,m.*,u.* FROM t_message m,t_user u WHERE m.releaser=u.id AND m.id in (-->
+<!--            SELECT media_id FROM t_media_sort WHERE media_type=${mediaType} AND sort_id=${sortId}-->
+<!--        )-->
+<!--    </select>-->
+</mapper>

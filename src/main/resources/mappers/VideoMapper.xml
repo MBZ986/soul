@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smartrick.soul.mapper.VideoMapper">
+    <resultMap id="videoMap" type="video">
+        <id property="id" column="v_id" />
+        <result property="title" column="title"/>
+        <result property="coverUrl" column="cover_url"/>
+        <result property="resume" column="resume"/>
+        <result property="contentUrl" column="content_url"/>
+        <result property="likeNum" column="like_num"/>
+        <result property="playNum" column="play_num"/>
+        <result property="collectNum" column="collect_num"/>
+        <result property="releaseDate" column="release_date"/>
+        <association property="releaser" javaType="user">
+            <id property="id" column="u_id" />
+            <result property="username" column="username"/>
+            <result property="headImgUrl" column="head_img_url"/>
+            <result property="signature" column="signature"/>
+            <result property="email" column="email"/>
+            <result property="birthday" column="birthday"/>
+        </association>
+    </resultMap>
+
+    <select id="selectPageVideo" resultMap="videoMap">
+        SELECT v.id v_id,u.id u_id,v.*,u.* FROM t_video v,t_user u WHERE v.releaser=u.id LIMIT ${current},${size}
+    </select>
+
+    <select id="selectVideoById" resultMap="videoMap">
+        SELECT v.id v_id,u.id u_id,v.*,u.* FROM t_video v,t_user u WHERE v.releaser=u.id AND v.id = #{id}
+    </select>
+
+    <update id="updateVideoById">
+        UPDATE t_video
+        <set>
+            <if test="video.title != null and video.title!= ''">
+                title=#{video.title},
+            </if>
+            <if test="video.coverUrl != null and video.coverUrl!= ''">
+                cover_url=#{video.coverUrl},
+            </if>
+            <if test="video.resume != null and video.resume!= ''">
+                resume=#{video.resume},
+            </if>
+            <if test="video.contentUrl != null and video.contentUrl!= ''">
+                content_url=#{video.contentUrl},
+            </if>
+            <if test="video.releaser != null and video.releaser.id!=null">
+                releaser=#{video.releaser.id}
+            </if>
+        </set>
+        WHERE id=#{video.id}
+    </update>
+
+    <update id="playing">
+        UPDATE t_video SET play_num=play_num+1 WHERE id=${videoId}
+    </update>
+
+    <update id="liker">
+        UPDATE t_video SET like_num=like_num+1 WHERE id=${videoId}
+    </update>
+
+    <update id="unliker">
+        UPDATE t_video SET like_num=like_num-1 WHERE id=${videoId}
+    </update>
+
+    <update id="collect">
+        UPDATE t_video SET collect_num=collect_num+1 WHERE id=${videoId}
+    </update>
+
+    <update id="uncollect">
+        UPDATE t_video SET collect_num=collect_num-1 WHERE id=${videoId}
+    </update>
+
+</mapper>
